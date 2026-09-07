@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'onboarding_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +28,11 @@ class SplashScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/logo.png', width: 50, height: 50),
+            Image.asset(
+              'assets/images/carrot_logo.png',
+              width: 50,
+              height: 50,
+            ),
             const SizedBox(width: 15),
             Column(
               mainAxisSize: MainAxisSize.min,
@@ -21,8 +42,8 @@ class SplashScreen extends StatelessWidget {
                   'nectar',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 50,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 1.5,
                   ),
                 ),
@@ -31,7 +52,7 @@ class SplashScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
-                    letterSpacing: 5.0,
+                    letterSpacing: 4,
                   ),
                 ),
               ],

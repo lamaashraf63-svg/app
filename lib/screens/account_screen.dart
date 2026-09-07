@@ -10,53 +10,78 @@ class AccountScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20.0),
               child: Row(
                 children: [
-                  SizedBox(
-                    width: 65,
-                    height: 65,
-                    child: ClipOval(
-                      child: Image.asset('assets/images/person.png', fit: BoxFit.cover),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.asset(
+                      'assets/images/profile.jpg',
+                      width: 65,
+                      height: 65,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   const SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Row(
-                        children: [
-                          Text(
-                            'Afsar Hossen',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: const [
+                            Text(
+                              'Afsar Hossen',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF181B19),
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.edit_outlined,
+                              size: 18,
+                              color: Color(0xFF53B175),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        const Text(
+                          'imshuvo97@gmail.com',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF7C7C7C),
                           ),
-                          SizedBox(width: 5),
-                          Icon(Icons.edit, size: 16, color: Color(0xFF53B175)),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        'imshuvo97@gmail.com',
-                        style: TextStyle(color: Color(0xFF7C7C7C), fontSize: 14),
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            const Divider(thickness: 1),
-            const AccountTile(icon: Icons.shopping_bag_outlined, title: 'Orders'),
-            const AccountTile(icon: Icons.card_membership, title: 'My Details'),
-            const AccountTile(icon: Icons.location_on_outlined, title: 'Delivery Address'),
-            const AccountTile(icon: Icons.payment, title: 'Payment Methods'),
-            const AccountTile(icon: Icons.local_offer_outlined, title: 'Promo Code'),
-            const AccountTile(icon: Icons.notifications_none, title: 'Notifications'),
-            const AccountTile(icon: Icons.help_outline, title: 'Help'),
-            const AccountTile(icon: Icons.info_outline, title: 'About'),
-            const Spacer(),
+            const Divider(color: Color(0xFFE2E2E2), thickness: 1),
+
+            
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildAccountItem(icon: Icons.shopping_bag_outlined, title: 'Orders'),
+                  _buildAccountItem(icon: Icons.badge_outlined, title: 'My Details'),
+                  _buildAccountItem(icon: Icons.location_on_outlined, title: 'Delivery Address'),
+                  _buildAccountItem(icon: Icons.payment_outlined, title: 'Payment Methods'),
+                  _buildAccountItem(icon: Icons.local_offer_outlined, title: 'Promo Cord'),
+                  _buildAccountItem(icon: Icons.notifications_none_outlined, title: 'Notifecations'),
+                  _buildAccountItem(icon: Icons.help_outline, title: 'Help'),
+                  _buildAccountItem(icon: Icons.info_outline, title: 'About'),
+                ],
+              ),
+            ),
+
+          
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20.0),
               child: SizedBox(
                 width: double.infinity,
                 height: 67,
@@ -76,7 +101,11 @@ class AccountScreen extends StatelessWidget {
                       SizedBox(width: 15),
                       Text(
                         'Log Out',
-                        style: TextStyle(color: Color(0xFF53B175), fontSize: 18, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF53B175),
+                        ),
                       ),
                     ],
                   ),
@@ -88,25 +117,28 @@ class AccountScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class AccountTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-
-  const AccountTile({super.key, required this.icon, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
+  static Widget _buildAccountItem({required IconData icon, required String title}) {
     return Column(
       children: [
         ListTile(
-          leading: Icon(icon, color: const Color(0xFF181B20)),
-          title: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF181B20)),
+          leading: Icon(icon, color: const Color(0xFF181B19)),
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF181B19),
+            ),
+          ),
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: Color(0xFF181B19),
+          ),
           onTap: () {},
         ),
-        const Divider(thickness: 1, height: 1),
+        const Divider(color: Color(0xFFE2E2E2), height: 1, indent: 20, endIndent: 20),
       ],
     );
   }

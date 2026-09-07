@@ -1,14 +1,42 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
-import 'explore_screen.dart';
-import 'favorites_screen.dart';
-import 'account_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    final List<Map<String, dynamic>> cartItems = [
+      {
+        'title': 'Organic Bananas',
+        'subtitle': '7pcs, Priceg',
+        'price': '\$4.99',
+        'image': 'assets/images/banana.png',
+        'quantity': 1,
+      },
+      {
+        'title': 'Red Apple',
+        'subtitle': '1kg, Priceg',
+        'price': '\$4.99',
+        'image': 'assets/images/apple.png',
+        'quantity': 2,
+      },
+      {
+        'title': 'Bell Pepper Red',
+        'subtitle': '1kg, Priceg',
+        'price': '\$5.99',
+        'image': 'assets/images/pepper.png',
+        'quantity': 1,
+      },
+      {
+        'title': 'Ginger',
+        'subtitle': '250gm, Priceg',
+        'price': '\$2.99',
+        'image': 'assets/images/ginger.png',
+        'quantity': 1,
+      },
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -17,27 +45,120 @@ class CartScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'My Cart',
-          style: TextStyle(color: Color(0xFF181B20), fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+            color: Color(0xFF181B19),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                children: const [
-                  CartItem(image: 'assets/images/pepper.png', name: 'Bell Pepper Red', weight: '1kg, Price', price: '\$4.99'),
-                  Divider(),
-                  CartItem(image: 'assets/images/egg_carton.png', name: 'Egg Chicken Red', weight: '4pcs, Price', price: '\$1.99'),
-                  Divider(),
-                  CartItem(image: 'assets/images/banana.png', name: 'Organic Bananas', weight: '12kg, Price', price: '\$3.00'),
-                  Divider(),
-                  CartItem(image: 'assets/images/ginger.png', name: 'Ginger', weight: '250gm, Price', price: '\$2.99'),
-                ],
-              ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.all(20),
+              itemCount: cartItems.length,
+              separatorBuilder: (context, index) => const Divider(height: 30, color: Color(0xFFE2E2E2)),
+              itemBuilder: (context, index) {
+                final item = cartItems[index];
+                return Row(
+                  children: [
+                    SizedBox(
+                      width: 70,
+                      height: 70,
+                      child: Image.asset(item['image'], fit: BoxFit.contain),
+                    ),
+                    const SizedBox(width: 15),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                item['title'],
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF181B19),
+                                ),
+                              ),
+                              const Icon(Icons.close, color: Color(0xFFB3B3B3), size: 20),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            item['subtitle'],
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF7C7C7C),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(17),
+                                      border: Border.all(color: const Color(0xFFE2E2E2)),
+                                    ),
+                                    child: IconButton(
+                                      icon: const Icon(Icons.remove, size: 16, color: Color(0xFFB3B3B3)),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                                    child: Text(
+                                      '${item['quantity']}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF181B19),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(17),
+                                      border: Border.all(color: const Color(0xFF53B175)),
+                                    ),
+                                    child: IconButton(
+                                      icon: const Icon(Icons.add, size: 16, color: Color(0xFF53B175)),
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                item['price'],
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF181B19),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
-            SizedBox(
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: SizedBox(
               width: double.infinity,
               height: 67,
               child: ElevatedButton(
@@ -46,119 +167,40 @@ class CartScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(19),
                   ),
+                  elevation: 0,
                 ),
                 onPressed: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    SizedBox(width: 20),
-                    Text(
+                  children: [
+                    const SizedBox(width: 10),
+                    const Text(
                       'Go to Checkout',
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF489E67),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Text(
                         '\$12.96',
-                        style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF53B175),
-        unselectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Shop'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Explore'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
-        ],
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-          } else if (index == 1) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ExploreScreen()));
-          } else if (index == 3) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FavoritesScreen()));
-          } else if (index == 4) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AccountScreen()));
-          }
-        },
-      ),
-    );
-  }
-}
-
-class CartItem extends StatelessWidget {
-  final String image;
-  final String name;
-  final String weight;
-  final String price;
-
-  const CartItem({super.key, required this.image, required this.name, required this.weight, required this.price});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          SizedBox(width: 70, height: 70, child: Image.asset(image)),
-          const SizedBox(width: 15),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 5),
-                Text(weight, style: const TextStyle(color: Color(0xFF7C7C7C), fontSize: 14)),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Container(
-                      width: 45,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xFFE2E2E2)),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Icon(Icons.remove, color: Color(0xFFB3B3B3)),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Text('1', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                    ),
-                    Container(
-                      width: 45,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xFFE2E2E2)),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Icon(Icons.add, color: Color(0xFF53B175)),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(Icons.close, color: Color(0xFFB3B3B3)),
-              const SizedBox(height: 35),
-              Text(price, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            ],
           ),
         ],
       ),

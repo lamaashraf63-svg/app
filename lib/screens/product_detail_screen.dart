@@ -8,115 +8,196 @@ class ProductDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFFF2F3F2),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF181B20)),
+          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF181B19)),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.ios_share, color: Color(0xFF181B20)),
+            icon: const Icon(Icons.ios_share, color: Color(0xFF181B19)),
             onPressed: () {},
           ),
         ],
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Container(
-              height: 220,
-              color: Colors.grey.shade100,
-              child: Center(
-                child: Image.asset('assets/images/apple.png', height: 160),
+          Container(
+            width: double.infinity,
+            height: 270,
+            decoration: const BoxDecoration(
+              color: Color(0xFFF2F3F2),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
               ),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset('assets/images/apple.png', height: 190, fit: BoxFit.contain),
+                Positioned(
+                  bottom: 15,
+                  child: Row(
+                    children: [
+                      Container(width: 20, height: 4, decoration: BoxDecoration(color: const Color(0xFF53B175), borderRadius: BorderRadius.circular(2))),
+                      const SizedBox(width: 5),
+                      Container(width: 10, height: 4, decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(2))),
+                      const SizedBox(width: 5),
+                      Container(width: 10, height: 4, decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(2))),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: Container(
+            child: Padding(
               padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset(0, -5),
-                  ),
-                ],
-              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         'Naturel Red Apple',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF181B20)),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF181B19),
+                        ),
                       ),
-                      Icon(Icons.favorite_border, color: Color(0xFF7C7C7C)),
+                      IconButton(
+                        icon: const Icon(Icons.favorite_border, color: Color(0xFF7C7C7C)),
+                        onPressed: () {},
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 5),
                   const Text(
                     '1kg, Priceg',
-                    style: TextStyle(color: Color(0xFF7C7C7C), fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: Color(0xFF7C7C7C)),
                   ),
-                  const SizedBox(height: 20),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.remove, size: 24, color: Color(0xFF7C7C7C)),
-                          const SizedBox(width: 15),
+                          IconButton(
+                            icon: const Icon(Icons.remove, color: Color(0xFFB3B3B3)),
+                            onPressed: () {},
+                          ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                             decoration: BoxDecoration(
                               border: Border.all(color: const Color(0xFFE2E2E2)),
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: const Text('1', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            child: const Text(
+                              '1',
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          const SizedBox(width: 15),
-                          const Icon(Icons.add, size: 24, color: Color(0xFF53B175)),
+                          IconButton(
+                            icon: const Icon(Icons.add, color: Color(0xFF53B175)),
+                            onPressed: () {},
+                          ),
                         ],
                       ),
                       const Text(
                         '\$4.99',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF181B20)),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF181B19),
+                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 25),
-                  const Divider(),
-                  const ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text('Product Detail', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                    trailing: Icon(Icons.keyboard_arrow_down),
+                  const Spacer(),
+                  const Divider(color: Color(0xFFE2E2E2)),
+                  ExpansionTile(
+                    title: const Text(
+                      'Product Detail',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF181B19)),
+                    ),
+                    trailing: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF181B19)),
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Text(
+                          'Apples Are Nutritious. Apples May Be Good For Weight Loss. Apples May Be Good For Your Heart. As Part Of A Healthy And Varied Diet.',
+                          style: TextStyle(color: Color(0xFF7C7C7C), fontSize: 13, height: 1.5),
+                        ),
+                      ),
+                    ],
                   ),
-                  const Text(
-                    'Apples are nutritious. Apples may be good for weight loss. apples may be good for heart health. As part of a healthful and varied diet.',
-                    style: TextStyle(color: Color(0xFF7C7C7C), fontSize: 13, height: 1.5),
+                  const Divider(color: Color(0xFFE2E2E2)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Nutritions',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF181B19)),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFEBEBEB),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Text('100gr', style: TextStyle(color: Color(0xFF7C7C7C), fontSize: 10)),
+                          ),
+                          const SizedBox(width: 10),
+                          const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF181B19)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Divider(color: Color(0xFFE2E2E2)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Review',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF181B19)),
+                      ),
+                      Row(
+                        children: const [
+                          Icon(Icons.star, color: Colors.amber, size: 18),
+                          Icon(Icons.star, color: Colors.amber, size: 18),
+                          Icon(Icons.star, color: Colors.amber, size: 18),
+                          Icon(Icons.star, color: Colors.amber, size: 18),
+                          Icon(Icons.star, color: Colors.amber, size: 18),
+                          SizedBox(width: 10),
+                          Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF181B19)),
+                        ],
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   SizedBox(
                     width: double.infinity,
-                    height: 67,
+                    height: 60,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF53B175),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(19),
+                          borderRadius: BorderRadius.circular(18),
                         ),
                       ),
                       onPressed: () {},
                       child: const Text(
                         'Add To Basket',
-                        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
